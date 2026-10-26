@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SleepSync | Phone Usage & Sleep Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header class="hero">
+        <div class="brand-mark">🌙</div>
+        <p class="eyebrow">DIGITAL WELLNESS DASHBOARD</p>
+        <h1>SleepSync</h1>
+        <p class="subtitle">Understand your phone habits. Explore your sleep patterns.</p>
+    </header>
+
+    <main class="container">
+        <section class="upload-card">
+            <h2>Start your analysis</h2>
+            <p>Upload the student CSV file to generate your dashboard.</p>
+            <form method="POST" enctype="multipart/form-data">
+                <label class="file-label" for="dataset">Choose CSV dataset</label>
+                <input id="dataset" type="file" name="dataset" accept=".csv" required>
+                <button type="submit">Analyze Dataset</button>
+            </form>
+            <p class="hint">Required columns: phone_usage_hours, sleep_hours, social_media_hours, youtube_hours,
+                gaming_hours.</p>
+        </section>
+
+        {% if error %}
+        <div class="alert">{{ error }}</div>
+        {% endif %}
+
+        {% if result %}
+        <div class="success">Analysis complete · {{ result.rows }} valid records</div>
+
+        <section class="metrics">
+            <article class="metric-card">
+                <span>Average Phone Usage</span>
+                <strong>{{ result.avg_phone }} <small>hrs</small></strong>
+            </article>
+            <article class="metric-card">
+                <span>Average Sleep</span>
+                <strong>{{ result.avg_sleep }} <small>hrs</small></strong>
+            </article>
+            <article class="metric-card">
+                <span>Most-used Activity</span>
+                <strong class="activity-value">{{ result.most_used }}</strong>
+            </article>
+        </section>
+
+        <section class="charts-grid">
+            <article class="chart-card">
+                <h2>Digital Activity Usage</h2>
+                <img src="data:image/png;base64,{{ result.activity_chart }}" alt="Digital activity pie chart">
+            </article>
+            <article class="chart-card">
+                <h2>Phone Usage Levels</h2>
+                <img src="data:image/png;base64,{{ result.usage_chart }}" alt="Phone usage levels pie chart">
+            </article>
+            <article class="chart-card wide">
+                <h2>Phone Usage vs Sleep</h2>
+                <img src="data:image/png;base64,{{ result.sleep_chart }}"
+                    alt="Scatter plot comparing phone usage and sleep">
+                <p class="chart-note">This chart shows patterns in the data; it does not prove that phone use causes
+                    changes in sleep.</p>
+            </article>
+        </section>
+
+        <section class="night-card">
+            <div class="night-icon">🌙</div>
+            <div>
+                <p class="eyebrow">SMART SUGGESTION</p>
+                <h2>Night Mode Recommendation</h2>
+                {% if result.night_mode %}
+                <p class="status on">Night Mode: ON</p>
+                <p>Consider limiting <strong>{{ result.most_used }}</strong> during late-night hours.</p>
+                {% else %}
+                <p class="status off">Night Mode: OFF</p>
+                <p>The recommendation activates at 11:00 PM.</p>
+                {% endif %}
+                <p class="chart-note">This is a proposed recommendation only. The dataset has no time-of-day usage data,
+                    and this website does not block apps. Keep emergency calls and messages available.</p>
+            </div>
+        </section>
+        {% endif %}
+
+        <footer>
+            <p>SleepSync · Student Phone Usage & Sleep Analysis</p>
+        </footer>
+    </main>
+</body>
+
+</html>

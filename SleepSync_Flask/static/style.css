@@ -1,0 +1,251 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #172554;
+    --blue: #3156a6;
+    --lavender: #eef2ff;
+    --ink: #202943;
+    --muted: #68738b;
+    --card: #ffffff;
+    --line: #e3e8f2;
+}
+
+body {
+    margin: 0;
+    background: #f5f7fc;
+    color: var(--ink);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.hero {
+    padding: 42px 20px 76px;
+    text-align: center;
+    color: white;
+    background: linear-gradient(135deg, #172554, #344fa0 62%, #6879c7);
+}
+
+.brand-mark {
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+.eyebrow {
+    margin: 0 0 8px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    opacity: .8;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(38px, 6vw, 58px);
+    letter-spacing: -1.5px;
+}
+
+.subtitle {
+    margin: 12px 0 0;
+    color: #e1e7ff;
+}
+
+.container {
+    width: min(1100px, calc(100% - 32px));
+    margin: -42px auto 0;
+    position: relative;
+}
+
+.upload-card, .metric-card, .chart-card, .night-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 10px 28px rgba(28, 43, 83, .05);
+}
+
+.upload-card {
+    padding: 26px;
+    margin-bottom: 24px;
+}
+
+h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.upload-card p {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.file-label {
+    font-weight: 600;
+}
+
+input[type="file"] {
+    flex: 1;
+    min-width: 210px;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fbfcff;
+}
+
+button {
+    border: 0;
+    padding: 12px 20px;
+    border-radius: 10px;
+    color: white;
+    background: var(--blue);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--navy);
+}
+
+.hint, .chart-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.alert, .success {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin: 16px 0;
+}
+
+.alert {
+    background: #fff1f1;
+    border: 1px solid #ffd2d2;
+    color: #9b2424;
+}
+
+.success {
+    background: #edf9f1;
+    border: 1px solid #ccebd5;
+    color: #216c3b;
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.metric-card {
+    padding: 22px;
+}
+
+.metric-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.metric-card strong {
+    display: block;
+    font-size: clamp(22px, 3vw, 32px);
+    color: var(--navy);
+}
+
+.metric-card small {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.metric-card .activity-value {
+    font-size: clamp(18px, 2vw, 25px);
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.chart-card {
+    padding: 22px;
+    min-width: 0;
+}
+
+.chart-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 8px auto 0;
+}
+
+.chart-card.wide {
+    grid-column: 1 / -1;
+}
+
+.night-card {
+    display: flex;
+    gap: 18px;
+    padding: 24px;
+    margin-top: 20px;
+}
+
+.night-icon {
+    font-size: 34px;
+}
+
+.night-card p {
+    line-height: 1.6;
+}
+
+.status {
+    font-weight: 800;
+}
+
+.status.on {
+    color: #a66a00;
+}
+
+.status.off {
+    color: #53627e;
+}
+
+footer {
+    padding: 28px 8px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+@media (max-width: 700px) {
+    .metrics, .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card.wide {
+        grid-column: auto;
+    }
+
+    .night-card {
+        flex-direction: column;
+    }
+
+    form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
